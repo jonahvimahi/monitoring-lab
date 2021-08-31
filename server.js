@@ -18,14 +18,11 @@ app.get('/main', (req, res) => {
 app.use('/css', express.static('public/styles.css'))
 
 app.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, "/public/main.js"))
-    rollbar.info("main.js served successfully")
+    res.sendFile(path.join(__dirname, "/public/index.html"))
+    rollbar.info("index.html served successfully")
 })
 
-app.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, "/public/index.html"))
-    rollbar.info("html file served successfully")
-})
+
 app.post('/api/student', (req, res) => {
     let {name} = req.body
     name = name.trim()
