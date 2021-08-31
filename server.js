@@ -12,4 +12,6 @@ app.use(express.json())
 
 const port = process.env.PORT || 4545
 
+app.use(rollbar.errorHandler())
+
 app.listen(port, () => console.log(`we are up and running on ${port}`))
