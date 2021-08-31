@@ -8,7 +8,7 @@ const rollbar = new Rollbar({
 })
 
 
-
+const person = []
 const app = express()
 app.use(express.json())
 
@@ -16,9 +16,27 @@ app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "/public/index.html"))
     rollbar.info("html file served successfully")
 })
+app.post('/api/student', (req, res) => {
+    let {name} = req.body
+    name = name.trim()
+
+    const index = students.findIndex(personName=> personName ===name)
+
+    if(index === -1 && name !== ''){
+        person.push(name)
+        rollbar.log('person added successfully', {author: 'Jonah'})
+    } else if (name === '') {
+        rollbar.error('No name given')
+        res.status(400).send('must provide a name')
+    } else {
+        rollbar.error("this person was already added to the list")
+        res.status(400).send('That person was already added')
+    }
+})
 
 const port = process.env.PORT || 4545
 
 app.use(rollbar.errorHandler())
 
 app.listen(port, () => console.log(`we are up and running on ${port}`))
+res.status(200).send(person)
