@@ -25,6 +25,7 @@ app.post('/api/student', (req, res) => {
     if(index === -1 && name !== ''){
         person.push(name)
         rollbar.log('person added successfully', {author: 'Jonah'})
+        res.status(200).send(person)
     } else if (name === '') {
         rollbar.error('No name given')
         res.status(400).send('must provide a name')
@@ -34,9 +35,8 @@ app.post('/api/student', (req, res) => {
     }
 })
 
-const port = process.env.PORT || 4545
+const port = process.env.PORT || 5500
 
 app.use(rollbar.errorHandler())
 
 app.listen(port, () => console.log(`we are up and running on ${port}`))
-res.status(200).send(person)
