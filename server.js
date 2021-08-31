@@ -12,7 +12,9 @@ const person = []
 const app = express()
 app.use(express.json())
 
-app.use('/main', express.static('/public/main.js'))
+app.get('/js', (req, res) => {
+    res.sendFile(path.join(__dirname, '/public/main.js'))
+  });
 app.use('/css', express.static('public/styles.css'))
 
 app.get("/", (req, res) => {
