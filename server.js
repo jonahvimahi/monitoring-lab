@@ -23,7 +23,7 @@ app.get("/", (req, res) => {
 })
 
 
-app.post('/api/student', (req, res) => {
+app.post('/api/people', (req, res) => {
     let {name} = req.body
     name = name.trim()
 
